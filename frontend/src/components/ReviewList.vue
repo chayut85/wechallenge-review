@@ -1,18 +1,41 @@
 <template>
   <div>
-  <input v-text="search_review" placeholder="enter review id or text">
-  <input type="radio" id="search_id" value="One" v-model="picked">
-  <label for="search_id">Search by id</label>
-  <input type="radio" id="search_text" value="One" v-model="picked">
-  <label for="search_text">Search by text</label>
-  <button small color="primary"> Search </button>
+  <input v-text="search_review" placeholder="Enter review id or text">
+    <span v-for="(searchOption) in searchOptionList" :key="searchOption.id">
+      <input type="radio" :value="searchOption.id" v-model="picked2">{{searchOption.optionID}}
+    </span>
+    <button>Search</button>
+  <div>
+    <ul id="example-1">
+      <label v-for="review in reviewItems" :key="review.id">
+        {{ review.review }}<br>
+      </label>
+    </ul>
   </div>
+  </div>
+
+
+
 </template>
 
 <script>
+
 export default {
-  name: 'ReviewList'
+  name: 'ReviewList',
+  data: () => ({
+    picked2: 1,
+    searchOptionList:[
+      {optionID: "Search By ID", id: 1},
+      {optionID: "Search By Text", id: 2}
+    ],
+    reviewItems: [
+      { review: 'Review by Wongnai' },
+      { review: 'Review by Wongnok' }
+    ]
+  })
+
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
